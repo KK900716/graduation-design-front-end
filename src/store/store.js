@@ -9,6 +9,15 @@ export default new Vuex.Store({
 
     },
     state:{
-
+        Page1:{
+            show:{
+                account:'',
+                password:'',
+                name:'',
+                permission:'',
+                balance:'',
+                available:'',
+            },
+        }
     }
 })

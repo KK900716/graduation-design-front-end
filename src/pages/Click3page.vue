@@ -8,6 +8,7 @@
           <li @click="jump2">新建仓库</li>
           <li @click="jump3">查看仓库</li>
           <li @click="jump4">导出仓库</li>
+          <li @click="jump5">修改密码</li>
         </ul>
       </div>
     </transition>
@@ -25,6 +26,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Click3page",
@@ -38,6 +41,13 @@ export default {
       this.navigatorIsShow=!this.navigatorIsShow
     },
     jump1(){
+      axios.get('http://127.0.0.1/info',{
+        headers:{
+          token:window.localStorage.getItem('access-admin')
+        }
+      }).then((response)=>{
+        this.$store.state.Page1.show=response.data
+      })
       this.$router.push({
         name:'Page1'
       })
@@ -49,6 +59,9 @@ export default {
 
     },
     jump4(){
+
+    },
+    jump5(){
 
     }
   }
