@@ -10,6 +10,7 @@
         <li @click="click2">关于我们</li>
         <li @click="click3">项目业务</li>
         <li @click="click4">联系我们</li>
+        <li @click="click5">注销用户</li>
       </ul>
     </div>
   </div>
@@ -63,6 +64,25 @@ export default {
       this.$router.push({
         name:'click4'
       })
+    },
+    click5(){
+      this.$confirm('您确定要注销吗?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        window.localStorage.removeItem("access-admin");
+        location.reload();
+        this.$message({
+          type: 'success',
+          message: '注销成功!'
+        });
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '取消注销'
+        });
+      });
     }
   }
 }
