@@ -9,10 +9,10 @@
         <div class="form">
             <div class="hydl"><div class="text">帐号密码登录</div></div>
             <div class="splitLine"></div>
-            <div class="warning" v-show="warning.isShow">{{warning.content}}错误</div>
+            <div class="warning" v-show="warning.isShow">{{warning.content}}</div>
             <div class="user" >
               <i class="el-icon-s-custom"></i>
-              <input v-model.trim="userdata.userAccount" class="input" type="text" name="username" placeholder="请输入学号" autocomplete="on" autofocus maxlength="20">
+              <input v-model.trim="userdata.userAccount" class="input" type="text" name="username" placeholder="请输入用户名" autocomplete="on" autofocus maxlength="20">
             </div>
             <div class="password">
               <i class="el-icon-key"></i>

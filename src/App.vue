@@ -27,7 +27,7 @@ export default {
       axios.post('http://127.0.0.1:80/login',{...userdata}).then(value=>{
         if(value.data.state==="404"){
           this.warning.isShow=true
-          this.warning.content='用户名、密码或验证码'
+          this.warning.content='用户名、密码错误或验证码超时、错误'
           setTimeout(()=>this.warning.isShow=false,5000)
         }else if(value.data.state==="200"){
           //将token存入localStorage
