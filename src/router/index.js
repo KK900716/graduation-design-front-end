@@ -6,6 +6,7 @@ import home from "@/pages/home";
 import Click2page from "@/pages/Click2page";
 import Click4page from "@/pages/Click4page";
 import Click3page from "@/pages/Click3page";
+import Page1 from "@/pages/Page1";
 
 const router =new VueRouter({
     routes:[
@@ -34,7 +35,11 @@ const router =new VueRouter({
                     path:'projectBusiness',
                     component:Click3page,
                     children:[
-
+                        {
+                            name:'Page1',
+                            path:'data',
+                            component:Page1
+                        }
                     ]
                 },
                 {

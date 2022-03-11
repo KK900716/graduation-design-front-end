@@ -19,7 +19,25 @@
     <router-view></router-view>
   </div>
   <div class="foot">
-<!--    TODO 底部信息-->
+    <div class="foot_content">
+      <div class="foot_left">
+        <ul class="foot_left_ul">
+          <li @click="click1">首页</li>
+          <li @click="click2">关于我们</li>
+          <li @click="click3">项目业务</li>
+          <li @click="click4">联系我们</li>
+          <li @click="click5">注销用户</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot_explain">
+      <ul class="foot_explain_ul">
+        <li>邮箱：443808626@qq.com</li>
+        <li>微信：q443808626</li>
+        <li>电话：18094804869</li>
+        <li>地址：石河子大学</li>
+      </ul>
+    </div>
   </div>
  </div>
 </template>
@@ -90,7 +108,7 @@ export default {
 
 <style scoped>
 .top{
-  width: 100%;
+  width: 1920px;
   height: 120px;
   position: relative;
   -webkit-user-select:none;
@@ -142,9 +160,61 @@ export default {
 }
 .content{
   width: 100%;
-  height: 700px;
 }
 .foot{
-
+  position: relative;
+  top: -2px;
+  height: 146px;
+  background-color: #1b1b1b;
+}
+.foot_content{
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
+}
+.foot_left{
+  position: absolute;
+  width: 1140px;
+  height: 100%;
+  left: 300px;
+}
+.foot_left_ul{
+}
+.foot_left_ul>li{
+  font-size: 20px;
+  float: left;
+  margin: 48px 50px;
+  cursor: pointer;
+  transition: all 0.15s;
+  color: #444444;
+}
+.foot_left_ul>li:hover{
+  color: #9f05ad;
+}
+.foot_left_ul>li:active{
+  color: #9f05ad;
+  transform: translateX(1px) translateY(1px);
+}
+.foot_explain{
+  position: absolute;
+  left: 1200px;
+  width: 650px;
+  height: 100%;
+  border-left: 1px solid #7c7c7c;
+}
+.foot_explain_ul{
+  font-size: 18px;
+  color: #320949;
+}
+.foot_explain_ul>li{
+  text-align: left;
+  float: right;
+  width: 40%;
+  line-height: 20px;
+  padding: 20px 0;
+}
+.foot_explain_ul:hover li{
+  color: #ffffff;
 }
 </style>
