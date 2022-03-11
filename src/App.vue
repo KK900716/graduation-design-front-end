@@ -1,28 +1,55 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <!--    加载登录页信息，采用编程式路由在mounted生命周期钩子中加载-->
+    <router-view :loginMsg="loginMsg" :warning="warning"></router-view>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import axios from "axios";
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  data(){
+    return{
+      //登录页警告信息
+      warning:{
+        isShow:false,
+        content:''
+      }
+    }
+  },
+  methods:{
+    //处理登录信息
+    loginMsg(userdata){
+      this.isShow=false;
+      //发送ajax请求验证用户信息
+      axios.post('http://127.0.0.1:80/login',{...userdata}).then(value=>{
+        if(value.data.state==="404"){
+          this.warning.isShow=true
+          this.warning.content='用户名、密码或验证码'
+          setTimeout(()=>this.warning.isShow=false,5000)
+        }else if(value.data.state==="200"){
+          //将token存入localStorage
+          window.localStorage.setItem('access-admin',value.data.token)
+          //验证成功跳转路由
+          this.$router.replace({
+            name:'context'
+          });
+        }
+      })
+
+    }
+  },
+  mounted() {
+    //挂载登录页
+    this.$router.push({
+      name:'context'
+    })
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
