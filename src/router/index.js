@@ -1,7 +1,11 @@
 import VueRouter from 'vue-router'
 import axios from "axios";
 import IndexLogin from "@/pages/IndexLogin";
-import Context from "@/pages/Context";
+import ContextIndex from "@/pages/ContextIndex";
+import home from "@/pages/home";
+import Click2page from "@/pages/Click2page";
+import Click4page from "@/pages/Click4page";
+import Click3page from "@/pages/Click3page";
 
 const router =new VueRouter({
     routes:[
@@ -13,7 +17,32 @@ const router =new VueRouter({
         {
             name: 'context',
             path: '/context',
-            component: Context,
+            component: ContextIndex,
+            children:[
+                {
+                    name:'home',
+                    path:'home',
+                    component:home
+                },
+                {
+                    name:'click2',
+                    path:'aboutUs',
+                    component:Click2page
+                },
+                {
+                    name:'click3',
+                    path:'projectBusiness',
+                    component:Click3page,
+                    children:[
+
+                    ]
+                },
+                {
+                    name:'click4',
+                    path:'contactUs',
+                    component:Click4page
+                }
+            ]
         }
     ]
 })
