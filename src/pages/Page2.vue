@@ -14,7 +14,7 @@
             <input maxlength="50" v-model="$store.state.Page2.push.name" class="content_one_input" placeholder="请输入仓库名"/>
           </li>
           <li>
-            <div class="content_one_title">仓库容量：</div>
+            <div class="content_one_title">仓库总量（已创建+未创建）：</div>
             <input disabled  v-model="$store.state.Page2.show.capacity" class="content_one_input" placeholder="仓库容量"/>
           </li>
           <li></li>
@@ -63,14 +63,13 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        axios.put('http://127.0.0.1/newWareHouse',{
-          data:this.$store.state.Page2.push
-        },{
+        axios.post('http://127.0.0.1/newWareHouse',this.$store.state.Page2.push,{
           headers:{
             token:window.localStorage.getItem('access-admin')
           }
         }).then((response)=>{
           if (response.data===true){
+            this.$store.state.Page2.show.available--
             this.$message({
               type: 'success',
               message: '新建成功!'

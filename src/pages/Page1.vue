@@ -94,14 +94,14 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        axios.put('http://127.0.0.1/updateinfo',{
-          data:this.$store.state.Page1.show
-        },{
+        axios.put('http://127.0.0.1/updateInfo',this.$store.state.Page1.show,{
           headers:{
             token:window.localStorage.getItem('access-admin')
           }
         }).then((response)=>{
-            if (response.data===true){
+            if (response.data.state===true){
+              window.localStorage.removeItem('access-admin')
+              window.localStorage.setItem('access-admin',response.data.token)
               this.$message({
                 type: 'success',
                 message: '提交成功!'
@@ -109,7 +109,7 @@ export default {
             }else {
               this.$message({
                 type: 'warning',
-                message: '提交失败!'
+                message: '提交失败,用户名重复!'
               });
             }
         })
