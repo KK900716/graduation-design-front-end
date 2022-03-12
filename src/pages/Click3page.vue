@@ -53,10 +53,28 @@ export default {
       })
     },
     jump2(){
-
+      axios.get('http://127.0.0.1/wareHouse',{
+        headers:{
+          token:window.localStorage.getItem('access-admin')
+        }
+      }).then((response)=>{
+        this.$store.state.Page2.show=response.data
+      })
+      this.$router.push({
+        name:'Page2'
+      })
     },
     jump3(){
-
+      axios.get('http://127.0.0.1/viewWareHouse',{
+        headers:{
+          token:window.localStorage.getItem('access-admin')
+        }
+      }).then((response)=>{
+        this.$store.state.Page3.show=response.data
+      })
+      this.$router.push({
+        name:'Page3'
+      })
     },
     jump4(){
 

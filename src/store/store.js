@@ -18,6 +18,20 @@ export default new Vuex.Store({
                 balance:'',
                 available:'',
             },
+        },
+        Page2:{
+            show:{
+                available:'',
+                capacity:'',
+            },
+            push:{
+                name:'',
+            }
+        },
+        Page3:{
+            show:{
+
+            },
         }
     }
 })

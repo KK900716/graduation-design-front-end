@@ -93,12 +93,12 @@ export default {
         location.reload();
         this.$message({
           type: 'success',
-          message: '注销成功!'
+          message: '注销成功！'
         });
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: '取消注销'
+          message: '取消注销！'
         });
       });
     }

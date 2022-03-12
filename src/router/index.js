@@ -7,6 +7,8 @@ import Click2page from "@/pages/Click2page";
 import Click4page from "@/pages/Click4page";
 import Click3page from "@/pages/Click3page";
 import Page1 from "@/pages/Page1";
+import Page2 from "@/pages/Page2";
+import Page3 from "@/pages/Page3";
 
 const router =new VueRouter({
     routes:[
@@ -39,7 +41,17 @@ const router =new VueRouter({
                             name:'Page1',
                             path:'data',
                             component:Page1
-                        }
+                        },
+                        {
+                            name:'Page2',
+                            path:'newWareHouse',
+                            component:Page2
+                        },
+                        {
+                            name:'Page3',
+                            path:'newWareHouse',
+                            component:Page3
+                        },
                     ]
                 },
                 {
