@@ -9,6 +9,7 @@ import Click3page from "@/pages/Click3page";
 import Page1 from "@/pages/Page1";
 import Page2 from "@/pages/Page2";
 import Page3 from "@/pages/Page3";
+import Page3WareHouse from "@/pages/Page3WareHouse";
 
 const router =new VueRouter({
     routes:[
@@ -52,6 +53,11 @@ const router =new VueRouter({
                             path:'newWareHouse',
                             component:Page3
                         },
+                        {
+                            name:'Page3WareHouse',
+                            path:'WareHouse/:name',
+                            component:Page3WareHouse
+                        }
                     ]
                 },
                 {

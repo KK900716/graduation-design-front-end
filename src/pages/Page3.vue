@@ -2,7 +2,10 @@
 <div class="content">
   <ul>
     <li>
-      <div class="content_title">查看仓库</div>
+      <div class="content_title">
+        <span>查看仓库：</span>
+        <input v-model.lazy.trim="screening" class="content_title_input" placeholder="请输入仓库名检索"/>
+      </div>
       <div class="content_table">
         <table class="tableContent">
           <tr>
@@ -11,14 +14,18 @@
             <th>已用容量</th>
             <th>剩余容量</th>
             <th>打开仓库</th>
+            <th>删除仓库</th>
           </tr>
-          <tr v-for="table in $store.state.Page3.show" :key="table.name">
+          <tr v-for="table in tables" :key="table.name">
             <td>{{table.name}}</td>
-            <td>{{table.capacity}}</td>
-            <td>{{table.use}}</td>
+            <td>{{table.count}}</td>
+            <td>{{table.available}}</td>
             <td>{{table.remaining}}</td>
             <td>
-
+              <div class="content_one_button" @click="click1(table.name)">打开</div>
+            </td>
+            <td>
+              <div class="content_one_button" @click="click2(table.name)">删除</div>
             </td>
           </tr>
         </table>
@@ -30,69 +37,42 @@
 
 <script>
 import axios from "axios";
-
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Page3",
   data(){
     return{
-
+      screening:'',
     }
   },
   methods:{
-    click1(){
-      this.$confirm('您确定重置信息?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(() => {
-        this.$store.state.Page2.push.name=''
-        this.$message({
-          type: 'success',
-          message: '重置成功!'
-        });
-      }).catch(() => {
-        this.$message({
-          type: 'info',
-          message: '取消重置！'
-        });
-      });
+    click1(name){
+      this.$router.push({
+        name:'Page3WareHouse',
+        params:{
+          name:name
+        }
+      })
     },
-    click2(){
-      this.$confirm('您确定要新建仓库吗?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(() => {
-        axios.put('http://127.0.0.1/newWareHouse',{
-          data:this.$store.state.Page2.push
-        },{
-          headers:{
-            token:window.localStorage.getItem('access-admin')
-          }
-        }).then((response)=>{
-          if (response.data===true){
-            this.$message({
-              type: 'success',
-              message: '新建成功!'
-            });
-          }else {
-            this.$message({
-              type: 'warning',
-              message: '新建失败!'
-            });
-          }
-        })
-        this.$message({
-          type: 'success',
-          message: '正在提交!'
-        });
-      }).catch(() => {
-        this.$message({
-          type: 'info',
-          message: '取消提交！'
-        });
-      });
+    click2(name){
+      axios.delete('http://127.0.0.1/delete?'+name,{
+        headers:{
+          token:window.localStorage.getItem('access-admin')
+        }
+      }).then((response)=>{
+        if (response.data){
+
+        }else {
+
+        }
+      })
+    }
+  },
+  computed:{
+    tables(){
+      return this.$store.state.Page3.show.filter((item)=>{
+        return !item.name.indexOf(this.screening)
+      })
     }
   }
 }
@@ -133,9 +113,29 @@ export default {
   text-align: center;
   width: 100%;
 }
-.table{
-  height: 380px;
-  margin-bottom: 20px;
-  overflow-y: auto;
+.content_title_input{
+  height: 22px;
+  line-height: 22px;
+  font-size: 18px;
+  width: 500px;
 }
+.content_one_button{
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
+  color: #ffffff;
+  width: 100px;
+  line-height: 30px;
+  text-align: center;
+  margin: 0 auto;
+  background-color: #9f05ad;
+  transition: all 0.15s;
+  box-shadow: 1px 2px 2px #9f05ad;
+}
+.content_one_button:active{
+  transform: translateX(1px) translateY(1px);
+  box-shadow: 1px 1px 1px #9f05ad;
+}
+
 </style>

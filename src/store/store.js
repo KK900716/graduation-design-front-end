@@ -29,9 +29,7 @@ export default new Vuex.Store({
             }
         },
         Page3:{
-            show:{
-
-            },
+            show:[]
         }
     }
 })

@@ -65,14 +65,12 @@ export default {
     },
     click2(){
       this.homeShow=false
-
       this.$router.push({
         name:'click2'
       })
     },
     click3(){
       this.homeShow=false
-
       this.$router.push({
         name:'click3'
       })
