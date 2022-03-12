@@ -77,7 +77,9 @@ export default {
       })
     },
     jump4(){
-
+      this.$router.push({
+        name:'Page4'
+      })
     },
     jump5(){
       this.$confirm('您确定要注销吗?', '提示', {

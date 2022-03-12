@@ -10,6 +10,7 @@ import Page1 from "@/pages/Page1";
 import Page2 from "@/pages/Page2";
 import Page3 from "@/pages/Page3";
 import Page3WareHouse from "@/pages/Page3WareHouse";
+import Page4 from "@/pages/Page4";
 
 const router =new VueRouter({
     routes:[
@@ -56,7 +57,13 @@ const router =new VueRouter({
                         {
                             name:'Page3WareHouse',
                             path:'WareHouse/:name',
-                            component:Page3WareHouse
+                            component:Page3WareHouse,
+                            props:true
+                        },
+                        {
+                            name:'Page4',
+                            path:'updatePassword',
+                            component:Page4
                         }
                     ]
                 },
