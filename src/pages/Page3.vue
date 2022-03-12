@@ -55,17 +55,41 @@ export default {
       })
     },
     click2(name){
-      axios.delete('http://127.0.0.1/delete?'+name,{
-        headers:{
-          token:window.localStorage.getItem('access-admin')
-        }
-      }).then((response)=>{
-        if (response.data){
-
-        }else {
-
-        }
-      })
+      this.$confirm('您确定要删除仓库吗?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        axios.delete('http://127.0.0.1/delete?name='+name,{
+          headers:{
+            token:window.localStorage.getItem('access-admin')
+          }
+        }).then((response)=>{
+          if (response.data===true){
+            this.$store.state.Page3.show=this.$store.state.Page3.show.filter((item)=>{
+              return item.name!==name
+            })
+            this.$message({
+              type: 'success',
+              message: '删除成功!'
+            });
+          }else {
+            this.$message({
+              type: 'warning',
+              message: '新建失败!'
+            });
+          }
+        })
+        this.$message({
+          type: 'warning',
+          message: '正在删除!'
+        });
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '取消删除！'
+        });
+      });
     }
   },
   computed:{
@@ -98,7 +122,7 @@ export default {
 }
 .content_table{
   width: 1500px;
-  height: 600px;
+  height: 580px;
 }
 .tableContent th,td{
   border-bottom: 1px solid #ddd;
