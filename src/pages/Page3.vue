@@ -6,32 +6,20 @@
       <div class="content_table">
         <table class="tableContent">
           <tr>
-            <th>学号</th>
-            <th>班级</th>
-            <th>姓名</th>
-            <th>学年</th>
-            <th>学期</th>
-            <th>审核状态</th>
-            <th>德育素质</th>
-            <th>智育素质</th>
-            <th>体育素质</th>
-            <th>美育素质</th>
-            <th>总成绩</th>
-            <th>排名</th>
+            <th>仓库名</th>
+            <th>仓库容量</th>
+            <th>已用容量</th>
+            <th>剩余容量</th>
+            <th>打开仓库</th>
           </tr>
-          <tr v-for="table in data" :key="table.userStudentId+table.schoolYear+table.semester">
-            <td>{{table.userStudentId}}</td>
-            <td>{{table.className}}</td>
-            <td>{{table.schoolYear}}</td>
-            <td>{{table.semester}}</td>
-            <td>{{table.userName}}</td>
-            <td>{{table.approved}}</td>
-            <td>{{table.moralityGrade}}</td>
-            <td>{{table.intellectionGrade}}</td>
-            <td>{{table.sportGrade}}</td>
-            <td>{{table.artGrade}}</td>
-            <td>{{table.totalScore}}</td>
-            <td>{{table.classRank}}</td>
+          <tr v-for="table in $store.state.Page3.show" :key="table.name">
+            <td>{{table.name}}</td>
+            <td>{{table.capacity}}</td>
+            <td>{{table.use}}</td>
+            <td>{{table.remaining}}</td>
+            <td>
+
+            </td>
           </tr>
         </table>
       </div>

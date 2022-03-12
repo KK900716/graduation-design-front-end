@@ -7,8 +7,8 @@
           <li @click="jump1">个人资料</li>
           <li @click="jump2">新建仓库</li>
           <li @click="jump3">查看仓库</li>
-          <li @click="jump4">导出仓库</li>
-          <li @click="jump5">修改密码</li>
+          <li @click="jump4">修改密码</li>
+          <li @click="jump5">注销用户</li>
         </ul>
       </div>
     </transition>
@@ -80,7 +80,23 @@ export default {
 
     },
     jump5(){
-
+      this.$confirm('您确定要注销吗?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        window.localStorage.removeItem("access-admin");
+        location.reload();
+        this.$message({
+          type: 'success',
+          message: '注销成功！'
+        });
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '取消注销！'
+        });
+      });
     }
   }
 }
