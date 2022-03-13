@@ -11,7 +11,7 @@
     <ul class="content_one_ul">
       <li>
         <div class="content_one_title">仓库名称：</div>
-        <input maxlength="50" v-model="$store.state.Page3Context.show.name" class="content_one_input" placeholder="请输入仓库名称"/>
+        <input maxlength="50" v-model.lazy.trim="$store.state.Page3Context.show.name" class="content_one_input" placeholder="请输入仓库名称"/>
       </li>
       <li>
         <div class="content_one_title">仓库容量：</div>
@@ -99,7 +99,7 @@ export default {
             token:window.localStorage.getItem('access-admin')
           }
         }).then((response)=>{
-          if (response.data.state===true){
+          if (response.data===true){
             this.fallback()
             this.$message({
               type: 'success',
@@ -108,7 +108,7 @@ export default {
           }else {
             this.$message({
               type: 'warning',
-              message: '提交失败,用户名重复!'
+              message: '提交失败,仓库名重复!'
             });
           }
         })

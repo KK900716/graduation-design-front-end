@@ -11,7 +11,7 @@
           </li>
           <li>
             <div class="content_one_title">新建仓库名：</div>
-            <input maxlength="50" v-model="$store.state.Page2.push.name" class="content_one_input" placeholder="请输入仓库名"/>
+            <input maxlength="50" v-model.lazy.trim="$store.state.Page2.push.name" class="content_one_input" placeholder="请输入仓库名"/>
           </li>
           <li>
             <div class="content_one_title">仓库总量（已创建+未创建）：</div>

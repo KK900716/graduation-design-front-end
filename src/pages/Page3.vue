@@ -85,7 +85,7 @@ export default {
           }else {
             this.$message({
               type: 'warning',
-              message: '新建失败!'
+              message: '删除失败!'
             });
           }
         })
