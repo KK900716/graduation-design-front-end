@@ -30,6 +30,14 @@ export default new Vuex.Store({
         },
         Page3:{
             show:[]
+        },
+        Page3Context:{
+            show:{
+                name:'',
+                count:'',
+                available:'',
+                remaining:''
+            },
         }
     }
 })

@@ -9,6 +9,7 @@
       <div class="content_table">
         <table class="tableContent">
           <tr>
+            <th>序号</th>
             <th>仓库名</th>
             <th>仓库容量</th>
             <th>已用容量</th>
@@ -16,7 +17,8 @@
             <th>打开仓库</th>
             <th>删除仓库</th>
           </tr>
-          <tr v-for="table in tables" :key="table.name">
+          <tr v-for="(table,index) in tables" :key="table.name">
+            <td>{{index+1}}</td>
             <td>{{table.name}}</td>
             <td>{{table.count}}</td>
             <td>{{table.available}}</td>
@@ -47,6 +49,13 @@ export default {
   },
   methods:{
     click1(name){
+      axios.get('http://127.0.0.1/getWareHouse?name='+name,{
+        headers:{
+          token:window.localStorage.getItem('access-admin')
+        }
+      }).then((response)=>{
+        this.$store.state.Page3Context.show=response.data
+      })
       this.$router.push({
         name:'Page3WareHouse',
         params:{

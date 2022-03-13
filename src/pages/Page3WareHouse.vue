@@ -1,13 +1,33 @@
 <template>
 <div class="content">
-  <div class="content_title">{{name}}仓库信息</div>
+  <div class="left_fix_button">
+    <div @click="fallback" class="left_fix_button_context">
+      <i class="el-icon-refresh-left" />
+      退出该仓库
+    </div>
+  </div>
+  <div class="content_title">仓库：{{name}}</div>
   <div class="content_one">
     <ul class="content_one_ul">
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
+      <li>
+        <div class="content_one_title">仓库名称：</div>
+        <input maxlength="50" v-model="$store.state.Page3Context.show.name" class="content_one_input" placeholder="请输入仓库名称"/>
+      </li>
+      <li>
+        <div class="content_one_title">仓库容量：</div>
+        <input disabled maxlength="20" v-model="$store.state.Page3Context.show.count" class="content_one_input" placeholder="仓库容量"/>
+      </li>
+      <li>
+        <div class="content_one_title">已用容量：</div>
+        <input disabled maxlength="20" v-model="$store.state.Page3Context.show.available" class="content_one_input" placeholder="已用容量"/>
+      </li>
+      <li>
+        <div class="content_one_title">剩余容量：</div>
+        <input disabled maxlength="20" v-model="$store.state.Page3Context.show.remaining" class="content_one_input" placeholder="剩余容量"/>
+      </li>
     </ul>
+    <div class="content_one_button" @click="click1">重置</div>
+    <div class="content_one_button" @click="click2">提交</div>
   </div>
   <div class="content_title">上传下载</div>
   <div class="content_two">
@@ -49,6 +69,63 @@ export default {
     };
   },
   methods: {
+    fallback(){
+      axios.get('http://127.0.0.1/viewWareHouse',{
+        headers:{
+          token:window.localStorage.getItem('access-admin')
+        }
+      }).then((response)=>{
+        this.$store.state.Page3.show=response.data
+      })
+      this.$router.push({
+        name:'Page3'
+      })
+    },
+    click1(){
+      this.$store.state.Page3Context.show.name=this.name
+    },
+    click2(){
+      this.$confirm('您确定要更新仓库信息吗?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.flushName=this.$store.state.Page3Context.show.name
+        axios.put('http://127.0.0.1/updateWHMessage',{
+          oldWHName:this.name,
+          newWHName:this.$store.state.Page3Context.show.name
+        },{
+          headers:{
+            token:window.localStorage.getItem('access-admin')
+          }
+        }).then((response)=>{
+          if (response.data.state===true){
+            this.fallback()
+            this.$message({
+              type: 'success',
+              message: '提交成功!'
+            });
+          }else {
+            this.$message({
+              type: 'warning',
+              message: '提交失败,用户名重复!'
+            });
+          }
+        })
+        this.$message({
+          type: 'success',
+          message: '正在提交!'
+        });
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '取消提交！'
+        });
+      });
+
+
+
+    },
     submitUpload() {
       this.$refs.upload.submit();
     },
@@ -65,34 +142,36 @@ export default {
     handlerError(err, file, fileList){
 
     },
-    update(e){
-      let self = this
-      let file = e.target.files[0]
-      /* eslint-disable no-undef */
-      let param = new FormData()  // 创建form对象
-      param.append('file', file)  // 通过append向form对象添加数据
-      param.append('chunk', '0') // 添加form表单中其他数据
-      console.log(param.get('file')) // FormData私有类对象，访问不到，可以通过get判断值是否传进去
-      let config = {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          token: window.localStorage.getItem('access-admin')
-        }
-      }
-      // 添加请求头
-      axios.post('http://127.0.0.1/upload', param, config)
-          .then(res => {
-            // if (res.data.code === 0) {
-            //   self.ImgUrl = res.data.data
-            // }
-            // console.log(res.data)
-          })
-    }
+
   }
 }
 </script>
 
 <style scoped>
+.left_fix_button{
+  position: fixed;
+  right: 50px;
+  top: 300px;
+}
+.left_fix_button_context{
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
+  color: #ffffff;
+  width: 150px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  background-color: #9f05ad;
+  transition: all 0.15s;
+  box-shadow: 1px 2px 2px #9f05ad;
+  border-radius: 20px;
+}
+.left_fix_button_context:active{
+  transform: translateX(1px) translateY(1px);
+  box-shadow: 1px 1px 1px #9f05ad;
+}
 .content{
   height: 650px;
   padding-left: 300px;
@@ -108,13 +187,6 @@ export default {
 .content_one{
   height: 200px;
   width: 1500px;
-  background-color: #40a9ff;
-}
-.content_one_ul li{
-  float: left;
-  background-color: #f13f83;
-  width: 750px;
-  height: 100px;
 }
 .content_two{
   width: 1500px;
@@ -125,5 +197,40 @@ export default {
   padding: 15px;
   width: 750px;
   margin: 0 auto;
+}
+.content_one_title{
+  margin: 0 0 5px 0;
+}
+.content_one_input{
+  height: 25px;
+  width: 500px;
+  font-size: 18px;
+}
+.content_one_button{
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
+  float: left;
+  color: #ffffff;
+  width: 200px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  margin: 10px 250px 0;
+  background-color: #9f05ad;
+  transition: all 0.15s;
+  box-shadow: 1px 2px 2px #9f05ad;
+}
+.content_one_button:active{
+  transform: translateX(1px) translateY(1px);
+  box-shadow: 1px 1px 1px #9f05ad;
+}
+.content_one li{
+  font-size: 18px;
+  float: left;
+  width: 50%;
+  height: 50px;
+  margin: 15px 0;
 }
 </style>
