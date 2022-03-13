@@ -29,25 +29,24 @@
     <div class="content_one_button" @click="click1">重置</div>
     <div class="content_one_button" @click="click2">提交</div>
   </div>
-  <div class="content_title">上传下载</div>
+  <div class="content_title">上传文件</div>
   <div class="content_two">
     <div class="content_two_upload">
       <el-upload
+          :headers="headerMessage"
+          :limit="listNumber"
           class="upload-demo"
           ref="upload"
           action="http://127.0.0.1/upload"
-          :on-preview="handlePreview"
-          :on-remove="handleRemove"
           :on-success="handlerSuccess"
           :on-error="handlerError"
+          :on-exceed="handlerExceed"
           :file-list="fileList"
           :auto-upload="false">
         <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
         <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
         <div slot="tip" class="el-upload__tip">请上传要处理的图片</div>
       </el-upload>
-<!--                :headers="headerMessage"-->
-<!--      <input name="file" type="file" accept="image/png,image/gif,image/jpeg" @change="update"/>-->
     </div>
   <div class="content_title">处理结果预览</div>
   </div>
@@ -65,7 +64,8 @@ export default {
       headerMessage:{
         token:window.localStorage.getItem('access-admin')
       },
-      fileList: []
+      fileList: [],
+      listNumber:parseInt(this.$store.state.Page3Context.show.available)
     };
   },
   methods: {
@@ -99,7 +99,7 @@ export default {
             token:window.localStorage.getItem('access-admin')
           }
         }).then((response)=>{
-          if (response.data===true){
+          if (response===true){
             this.fallback()
             this.$message({
               type: 'success',
@@ -122,27 +122,46 @@ export default {
           message: '取消提交！'
         });
       });
-
-
-
     },
     submitUpload() {
+      this.$message({
+        type: 'info',
+        message: '正在上传!'
+      });
       this.$refs.upload.submit();
     },
-    handleRemove(file, fileList) {
-      console.log(file, fileList);
-    },
-    handlePreview(file) {
-      console.log(this.fileList)
-      console.log(file);
-    },
     handlerSuccess(response, file, fileList){
-
+      if (response){
+        this.$message({
+          type: 'success',
+          message: '上传成功!'
+        });
+        axios.get('http://127.0.0.1/getWareHouse?name='+this.name,{
+          headers:{
+            token:window.localStorage.getItem('access-admin')
+          }
+        }).then((response)=>{
+          this.$store.state.Page3Context.show=response.data
+        })
+      }else{
+        this.$message({
+          type: 'warning',
+          message: '上传失败!'
+        });
+      }
     },
     handlerError(err, file, fileList){
-
+      this.$message({
+        type: 'warning',
+        message: '上传失败!'
+      });
     },
-
+    handlerExceed(){
+      this.$message({
+        type: 'warning',
+        message: '超出上传个数！'
+      });
+    }
   }
 }
 </script>
