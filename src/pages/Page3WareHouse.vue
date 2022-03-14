@@ -99,7 +99,7 @@ export default {
             token:window.localStorage.getItem('access-admin')
           }
         }).then((response)=>{
-          if (response===true){
+          if (response.data){
             this.fallback()
             this.$message({
               type: 'success',
