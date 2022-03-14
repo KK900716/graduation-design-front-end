@@ -20,9 +20,9 @@
     </div>
   </div>
   <div class="content_body">
-    <keep-alive>
+<!--    <keep-alive>-->
       <router-view></router-view>
-    </keep-alive>
+<!--    </keep-alive>-->
   </div>
 </div>
 </template>

@@ -33,6 +33,7 @@
   <div class="content_two">
     <div class="content_two_upload">
       <el-upload
+          :data="requestData"
           :headers="headerMessage"
           :limit="listNumber"
           class="upload-demo"
@@ -65,7 +66,10 @@ export default {
         token:window.localStorage.getItem('access-admin')
       },
       fileList: [],
-      listNumber:parseInt(this.$store.state.Page3Context.show.available)
+      listNumber:parseInt(this.$store.state.Page3Context.show.available),
+      requestData:{
+        name:this.name
+      }
     };
   },
   methods: {
