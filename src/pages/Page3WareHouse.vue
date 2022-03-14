@@ -1,11 +1,6 @@
 <template>
 <div class="content">
-  <div class="left_fix_button">
-    <div @click="fallback" class="left_fix_button_context">
-      <i class="el-icon-refresh-left" />
-      退出该仓库
-    </div>
-  </div>
+
   <div class="content_title">仓库：{{name}}</div>
   <div class="content_one">
     <ul class="content_one_ul">
@@ -50,6 +45,20 @@
       </el-upload>
     </div>
   <div class="content_title">处理结果预览</div>
+    <div class="content_title_img">
+      <img :src="url" v-for="url in urls" :key="url" alt="加载失败" >
+    </div>
+
+  </div>
+  <div class="left_fix_button">
+    <div @click="fallback" class="left_fix_button_context">
+      <i class="el-icon-refresh-left" />
+      退出该仓库
+    </div>
+    <div @click="refresh" class="left_fix_button_context">
+      <i class="el-icon-refresh-left" />
+      刷新处理结果
+    </div>
   </div>
 </div>
 </template>
@@ -69,7 +78,8 @@ export default {
       listNumber:parseInt(this.$store.state.Page3Context.show.available),
       requestData:{
         name:this.name
-      }
+      },
+      urls:[]
     };
   },
   methods: {
@@ -165,6 +175,15 @@ export default {
         type: 'warning',
         message: '超出上传个数！'
       });
+    },
+    refresh(){
+      axios.get('http://127.0.0.1/refresh?name='+this.name,{
+        headers:{
+          token:window.localStorage.getItem('access-admin')
+        }
+      }).then((response)=>{
+        this.urls=response.data
+      })
     }
   }
 }
@@ -177,6 +196,7 @@ export default {
   top: 300px;
 }
 .left_fix_button_context{
+  margin-top: 30px;
   -webkit-user-select:none;
   -moz-user-select:none;
   -ms-user-select:none;
@@ -255,5 +275,16 @@ export default {
   width: 50%;
   height: 50px;
   margin: 15px 0;
+}
+.content_title_img{
+  overflow: auto;
+  width: 1500px;
+  margin: 30px 0;
+  box-sizing: border-box;
+  border: 1px solid #9f05ad;
+}
+.content_title_img img{
+  width: 749px;
+  float: left;
 }
 </style>
