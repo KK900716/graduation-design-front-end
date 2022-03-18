@@ -24,7 +24,7 @@
     <div class="three_content">
       <div class="three_content_title">为用户提供服务</div>
       <div class="three_content_content">
-        <div class="paragraph">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div>
+        <div class="paragraph">XXX不同水体识别系统旨在为用户提供一个用于进行卫星、遥感图像水体识别的系统。</div>
         <div class="paragraph">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div>
       </div>
     </div>
@@ -119,6 +119,7 @@ export default {
   color: #9f05ad;
   font-size: 24px;
   font-weight: 400;
+  margin-bottom: 15px;
 }
 .three_content_content{
   margin: 0 auto;

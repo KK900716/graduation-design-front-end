@@ -160,6 +160,7 @@ export default {
   width: 100%;
 }
 .foot{
+  width: 1920px;
   position: relative;
   top: -2px;
   height: 146px;
