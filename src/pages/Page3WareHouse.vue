@@ -46,7 +46,23 @@
     </div>
   <div class="content_title">处理结果预览</div>
     <div class="content_title_img">
-      <img :src="url" v-for="url in urls" :key="url" alt="加载失败" >
+      <ul>
+        <li class="content_img_border" v-for="(url,index) in urls" :key="url">
+          <img :src="url"  alt="加载失败" >
+          <div class="content_img_option">
+            <div class="content_img_option_button" @click="downloadImg(url)">下载</div>
+            <div class="content_img_option_score">
+              评分
+              <el-rate
+                  v-model="imgScoreValue.score[index]"
+                  :colors="colors"
+                  @change="submitScore(imgScoreValue.score[index],url)"
+              >
+              </el-rate>
+            </div>
+          </div>
+        </li>
+      </ul>
     </div>
 
   </div>
@@ -79,10 +95,32 @@ export default {
       requestData:{
         name:this.name
       },
-      urls:[]
+      imgScoreValue: {
+        score:[]
+      },
+      urls:[],
+      colors: ['#99A9BF', '#F7BA2A', '#FF9900']
     };
   },
   methods: {
+    submitScore(score,requestUrl){
+      let split = requestUrl.split('&');
+      axios.get('http://127.0.0.1/submitScore?score='+score+'&'+split[1]+'&'+split[2],{
+        headers:{
+          token:window.localStorage.getItem('access-admin')
+        }
+      }).then((response)=>{
+        if (response.data){
+          this.$message({
+            type: 'success',
+            message: '评分成功!'
+          });
+        }
+      })
+    },
+    downloadImg(url){
+        window.open(url)
+    },
     fallback(){
       axios.get('http://127.0.0.1/viewWareHouse',{
         headers:{
@@ -284,7 +322,43 @@ export default {
   border: 1px solid #9f05ad;
 }
 .content_title_img img{
-  width: 749px;
+  width: 100%;
   float: left;
+}
+.content_img_border{
+  float: left;
+  width: 25%;
+  box-sizing: border-box;
+  border: 1px solid black;
+}
+.content_img_option{
+  float: left;
+  padding: 10px 0;
+}
+.content_img_option>div{
+  float: left;
+}
+.content_img_option_button{
+  margin-left: 50px;
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
+  color: #ffffff;
+  width: 100px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  background-color: #9f05ad;
+  transition: all 0.15s;
+  box-shadow: 1px 2px 2px #9f05ad;
+}
+.content_img_option_button:active{
+  transform: translateX(1px) translateY(1px);
+  box-shadow: 1px 1px 1px #9f05ad;
+}
+.content_img_option_score{
+  margin-left: 60px;
+
 }
 </style>

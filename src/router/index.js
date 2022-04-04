@@ -1,16 +1,16 @@
 import VueRouter from 'vue-router'
 import axios from "axios";
-import IndexLogin from "@/pages/IndexLogin";
-import ContextIndex from "@/pages/ContextIndex";
-import home from "@/pages/home";
-import Click2page from "@/pages/Click2page";
-import Click4page from "@/pages/Click4page";
-import Click3page from "@/pages/Click3page";
-import Page1 from "@/pages/Page1";
-import Page2 from "@/pages/Page2";
-import Page3 from "@/pages/Page3";
-import Page3WareHouse from "@/pages/Page3WareHouse";
-import Page4 from "@/pages/Page4";
+import IndexLogin from "../pages/IndexLogin";
+import ContextIndex from "../pages/ContextIndex";
+import home from "../pages/home";
+import Click2page from "../pages/Click2page";
+import Click4page from "../pages/Click4page";
+import Click3page from "../pages/Click3page";
+import Page1 from "../pages/Page1";
+import Page2 from "../pages/Page2";
+import Page3 from "../pages/Page3";
+import Page3WareHouse from "../pages/Page3WareHouse";
+import Page4 from "../pages/Page4";
 
 const router =new VueRouter({
     routes:[
