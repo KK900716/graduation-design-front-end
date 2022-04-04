@@ -50,7 +50,7 @@
         <li class="content_img_border" v-for="(url,index) in urls" :key="url">
           <img :src="url"  alt="加载失败" >
           <div class="content_img_option">
-            <div class="content_img_option_button" @click="downloadImg(url)">下载</div>
+            <div class="content_img_option_button" @click="downloadImg(url)">打开</div>
             <div class="content_img_option_score">
               评分
               <el-rate
@@ -114,6 +114,11 @@ export default {
           this.$message({
             type: 'success',
             message: '评分成功!'
+          });
+        }else {
+          this.$message({
+            type: 'warning',
+            message: '评分失败，请稍后重试!'
           });
         }
       })
