@@ -5,15 +5,15 @@
       <ul>
         <li>
           <div class="content_one_title">请输入旧密码：</div>
-          <input maxlength="20" v-model.lazy.trim="oldPassword" class="content_one_input" placeholder="请输入密码"/>
+          <input type="password" maxlength="20" v-model.lazy.trim="oldPassword" class="content_one_input" placeholder="请输入密码"/>
         </li>
         <li>
           <div class="content_one_title">请输入新密码：</div>
-          <input maxlength="20" v-model.lazy.trim="newPassword" class="content_one_input" placeholder="请输入新密码"/>
+          <input type="password" maxlength="20" v-model.lazy.trim="newPassword" class="content_one_input" placeholder="请输入新密码"/>
         </li>
         <li>
           <div class="content_one_title">请输入再次输入新密码：</div>
-          <input maxlength="20" v-model.lazy.trim="repeatPassword" class="content_one_input" placeholder="请输入新密码"/>
+          <input type="password" maxlength="20" v-model.lazy.trim="repeatPassword" class="content_one_input" placeholder="请输入新密码"/>
         </li>
         <li></li>
       </ul>
@@ -60,7 +60,7 @@ export default {
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          axios.post('http://127.0.0.1/updatePassword',{
+          axios.post(this.$store.state.path+'/updatePassword',{
             oldPassword:this.oldPassword,
             newPassword:this.newPassword
           },{

@@ -24,7 +24,7 @@ export default {
     loginMsg(userdata){
       this.isShow=false;
       //发送ajax请求验证用户信息
-      axios.post('http://127.0.0.1:80/login',{...userdata}).then(value=>{
+      axios.post(this.$store.state.path+'/login',{...userdata}).then(value=>{
         if(value.data.state==="404"){
           this.warning.isShow=true
           this.warning.content='用户名、密码错误或验证码超时、错误'

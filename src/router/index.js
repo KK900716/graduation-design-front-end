@@ -88,7 +88,7 @@ router.beforeEach((to,from,next)=>{
             next({name:'indexLogin'})
         } else {
             axios({
-                url:'http://127.0.0.1:80/checkToken',
+                url:'http://127.0.0.1'+'/checkToken',
                 method:'get',
                 headers:{
                     token:window.localStorage.getItem('access-admin')

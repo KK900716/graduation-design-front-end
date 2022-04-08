@@ -64,7 +64,6 @@
         </li>
       </ul>
     </div>
-
   </div>
   <div class="left_fix_button">
     <div @click="fallback" class="left_fix_button_context">
@@ -105,7 +104,7 @@ export default {
   methods: {
     submitScore(score,requestUrl){
       let split = requestUrl.split('&');
-      axios.get('http://127.0.0.1/submitScore?score='+score+'&'+split[1]+'&'+split[2],{
+      axios.get(this.$store.state.path+'/submitScore?score='+score+'&'+split[1]+'&'+split[2],{
         headers:{
           token:window.localStorage.getItem('access-admin')
         }
@@ -127,7 +126,7 @@ export default {
         window.open(url)
     },
     fallback(){
-      axios.get('http://127.0.0.1/viewWareHouse',{
+      axios.get(this.$store.state.path+'/viewWareHouse',{
         headers:{
           token:window.localStorage.getItem('access-admin')
         }
@@ -148,7 +147,7 @@ export default {
         type: 'warning'
       }).then(() => {
         this.flushName=this.$store.state.Page3Context.show.name
-        axios.put('http://127.0.0.1/updateWHMessage',{
+        axios.put(this.$store.state.path+'/updateWHMessage',{
           oldWHName:this.name,
           newWHName:this.$store.state.Page3Context.show.name
         },{
@@ -193,7 +192,7 @@ export default {
           type: 'success',
           message: '上传成功!'
         });
-        axios.get('http://127.0.0.1/getWareHouse?name='+this.name,{
+        axios.get(this.$store.state.path+'/getWareHouse?name='+this.name,{
           headers:{
             token:window.localStorage.getItem('access-admin')
           }
@@ -220,7 +219,7 @@ export default {
       });
     },
     refresh(){
-      axios.get('http://127.0.0.1/refresh?name='+this.name,{
+      axios.get(this.$store.state.path+'/refresh?name='+this.name,{
         headers:{
           token:window.localStorage.getItem('access-admin')
         }

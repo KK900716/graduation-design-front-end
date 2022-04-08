@@ -14,8 +14,9 @@
             <input maxlength="50" v-model="$store.state.Page1.show.account" class="content_one_input" placeholder="请输入用户名"/>
           </li>
           <li>
-            <div class="content_one_title">用户密码：</div>
-            <input  v-model="$store.state.Page1.show.password" disabled class="content_one_input" placeholder="密码"/>
+            <div class="content_one_title password">用户密码：</div>
+            <div @click="change" class="content_one_title password2" >显示\隐藏密码</div>
+            <input :type="passwordType"  v-model="$store.state.Page1.show.password" disabled class="content_one_input password3" placeholder="密码"/>
           </li>
           <li>
             <div class="content_one_title">用户权限：</div>
@@ -65,16 +66,26 @@ export default {
   name: "Page1",
   data(){
     return{
-
+      passwordType:'password'
     }
   },
   methods:{
+    change(){
+      if ('password'===this.passwordType){
+        this.passwordType='text'
+        setTimeout(()=>{
+          this.passwordType='password'
+        },5000)
+      }else{
+        this.passwordType='password'
+      }
+    },
     click1(){
       this.$message({
         type: 'info',
         message: '刷新中!'
       });
-      axios.get('http://127.0.0.1/info',{
+      axios.get(this.$store.state.path+'/info',{
         headers:{
           token:window.localStorage.getItem('access-admin')
         }
@@ -88,7 +99,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        axios.put('http://127.0.0.1/updateInfo',this.$store.state.Page1.show,{
+        axios.put(this.$store.state.path+'/updateInfo',this.$store.state.Page1.show,{
           headers:{
             token:window.localStorage.getItem('access-admin')
           }
@@ -183,5 +194,27 @@ export default {
 }
 .content_two,.content_three{
   width: 1500px;
+}
+.password{
+  float: left;
+}
+.password2{
+  float: left;
+  box-sizing: border-box;
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
+  color: #ffffff;
+  background-color: #9f05ad;
+  transition: all 0.15s;
+  box-shadow: 1px 1px 1px #9f05ad;
+}
+.password2:active{
+  transform: translateX(1px) translateY(1px);
+}
+.password3{
+  display: block;
+  clear: left;
 }
 </style>

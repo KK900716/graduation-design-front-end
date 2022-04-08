@@ -49,7 +49,7 @@ export default {
   },
   methods:{
     click1(name){
-      axios.get('http://127.0.0.1/getWareHouse?name='+name,{
+      axios.get(this.$store.state.path+'/getWareHouse?name='+name,{
         headers:{
           token:window.localStorage.getItem('access-admin')
         }
@@ -69,7 +69,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        axios.delete('http://127.0.0.1/delete?name='+name,{
+        axios.delete(this.$store.state.path+'/delete?name='+name,{
           headers:{
             token:window.localStorage.getItem('access-admin')
           }

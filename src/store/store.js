@@ -9,6 +9,7 @@ export default new Vuex.Store({
 
     },
     state:{
+        path:'http://127.0.0.1',
         Page1:{
             show:{
                 account:'',

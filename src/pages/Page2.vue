@@ -63,7 +63,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        axios.post('http://127.0.0.1/newWareHouse',this.$store.state.Page2.push,{
+        axios.post(this.$store.state.path+'/newWareHouse',this.$store.state.Page2.push,{
           headers:{
             token:window.localStorage.getItem('access-admin')
           }

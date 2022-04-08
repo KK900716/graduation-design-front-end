@@ -75,7 +75,7 @@ export default {
       if (!this.checkCodeState){
         this.checkCodeState=true;
         this.userdata.uid=this.uuid()//生成一个uuid
-        this.checkCode='http://127.0.0.1:80/checkcode?'+'uuid='+this.userdata.uid;
+        this.checkCode=this.$store.state.path+'/checkcode?'+'uuid='+this.userdata.uid;
         setTimeout(()=>this.checkCodeState=false,2000)
       }else{
         this.$message({

@@ -43,7 +43,7 @@ export default {
       this.navigatorIsShow=!this.navigatorIsShow
     },
     jump1(){
-      axios.get('http://127.0.0.1/info',{
+      axios.get(this.$store.state.path+'/info',{
         headers:{
           token:window.localStorage.getItem('access-admin')
         }
@@ -55,7 +55,7 @@ export default {
       })
     },
     jump2(){
-      axios.get('http://127.0.0.1/wareHouse',{
+      axios.get(this.$store.state.path+'/wareHouse',{
         headers:{
           token:window.localStorage.getItem('access-admin')
         }
@@ -67,7 +67,7 @@ export default {
       })
     },
     jump3(){
-      axios.get('http://127.0.0.1/viewWareHouse',{
+      axios.get(this.$store.state.path+'/viewWareHouse',{
         headers:{
           token:window.localStorage.getItem('access-admin')
         }
