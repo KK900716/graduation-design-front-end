@@ -5,7 +5,7 @@
     <div class="content">
       <aside class="aside">
         <img class="leftImg" src="../assets/indexLogin/login-site-bg.png" alt="加载失败">
-        <div class="leftText">欢迎进入XXXXXXX<br>水体识别系统</div>
+        <div class="leftText">欢迎进入<br>水体识别系统</div>
         <div class="form">
             <div class="hydl"><div class="text">帐号密码登录</div></div>
             <div class="splitLine"></div>

@@ -18,9 +18,10 @@
     <HomePage v-show="homeShow"></HomePage>
     <router-view></router-view>
   </div>
-  <div class="foot">
+<!--  <div class="foot">-->
     <div class="foot_content">
       <div class="foot_left">
+        <img class="foot_img" src="../assets/favicon.png" alt="">
         <ul class="foot_left_ul">
           <li @click="click1">首页</li>
           <li @click="click2">关于我们</li>
@@ -38,7 +39,7 @@
         <li>地址：石河子大学</li>
       </ul>
     </div>
-  </div>
+<!--  </div>-->
  </div>
 </template>
 
@@ -105,6 +106,15 @@ export default {
 </script>
 
 <style scoped>
+.foot_img{
+  position: absolute;
+  width: 60px;
+  left: -150px;
+  top: 25px;
+}
+.body{
+  height: 100%;
+}
 .top{
   width: 1920px;
   height: 120px;
@@ -159,13 +169,13 @@ export default {
 .content{
   width: 100%;
 }
-.foot{
-  width: 1920px;
-  position: relative;
-  top: -2px;
-  height: 146px;
-  background-color: #1b1b1b;
-}
+/*.foot{*/
+/*  width: 1920px;*/
+/*  position: relative;*/
+/*  top: -2px;*/
+/*  height: 146px;*/
+/*  background-color: #1b1b1b;*/
+/*}*/
 .foot_content{
   -webkit-user-select:none;
   -moz-user-select:none;
@@ -175,7 +185,7 @@ export default {
 .foot_left{
   position: absolute;
   width: 1140px;
-  height: 100%;
+  /*height: 100%;*/
   left: 300px;
 }
 .foot_left_ul{
@@ -199,7 +209,7 @@ export default {
   position: absolute;
   left: 1200px;
   width: 650px;
-  height: 100%;
+  /*height: 100%;*/
   border-left: 1px solid #7c7c7c;
 }
 .foot_explain_ul{
@@ -214,6 +224,7 @@ export default {
   padding: 20px 0;
 }
 .foot_explain_ul:hover li{
-  color: #ffffff;
+  color: #9f05ad;
+  font-weight: 700;
 }
 </style>
