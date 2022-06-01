@@ -1,24 +1,7 @@
-# bisheqianduan
+# 不同水体识别系统设计与实现
 
-## Project setup
+## 1. 项目简介
 ```
-npm install
+本项目采用Vue编写的前端项目，进入项目
+运行npm run serve 启动服务
 ```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
